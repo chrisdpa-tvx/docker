@@ -2,10 +2,10 @@ FROM openjdk:8-jdk
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 
-ARG JENKINS_HOME /var/jenkins_home
+ARG JENKINS_HOME=/var/jenkins_home
 ENV JENKINS_HOME ${JENKINS_HOME}
 
-ARG JENKINS_SLAVE_AGENT_PORT 50000
+ARG JENKINS_SLAVE_AGENT_PORT=50000
 ENV JENKINS_SLAVE_AGENT_PORT ${JENKINS_SLAVE_AGENT_PORT}
 
 ARG user=jenkins
