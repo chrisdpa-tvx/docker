@@ -2,8 +2,11 @@ FROM openjdk:8-jdk
 
 RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
 
-ENV JENKINS_HOME /var/jenkins_home
-ENV JENKINS_SLAVE_AGENT_PORT 50000
+ARG jenkins_home /var/jenkins_home
+ARG jenkins_slave_agent_port 50000
+
+ENV JENKINS_HOME ${jenkins_home}
+ENV JENKINS_SLAVE_AGENT_PORT ${jenkins_slave_agent_port}
 
 ARG user=jenkins
 ARG group=jenkins
@@ -18,7 +21,7 @@ RUN groupadd -g ${gid} ${group} \
 
 # Jenkins home directory is a volume, so configuration and build history 
 # can be persisted and survive image upgrades
-VOLUME /var/jenkins_home
+VOLUME ${jenkins_home}
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want 
 # to set on a fresh new installation. Use it to bundle additional plugins 
